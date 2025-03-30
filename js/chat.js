@@ -80,7 +80,6 @@ function setupEventListeners() {
     if (chatPanel) {
         showChat();
     }
-=======
     
     // Close chat
     if (closeChatBtn) {

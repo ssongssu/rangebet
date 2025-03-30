@@ -80,3 +80,77 @@
     box-shadow: none !important;
     border: none !important;
 }
+
+/* Chat box styling */
+.chat-box {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 400px !important;
+    width: 100% !important;
+    margin-top: 20px !important;
+    border: 3px solid var(--text) !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+    box-shadow: 8px 8px 0 var(--text) !important;
+    background-color: white !important;
+}
+
+.chat-header {
+    background-color: var(--accent) !important;
+    color: var(--text) !important;
+    padding: 10px 15px !important;
+    border-bottom: 2px solid var(--text) !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+.chat-messages {
+    flex: 1 !important;
+    overflow-y: auto !important;
+    padding: 15px !important;
+    background-color: white !important;
+    background-image: none !important;
+    min-height: 250px !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.chat-input-container {
+    display: flex !important;
+    padding: 10px !important;
+    background-color: white !important;
+    border-top: 2px solid var(--text) !important;
+}
+
+.chat-input {
+    flex: 1 !important;
+    padding: 8px 12px !important;
+    border: 2px solid var(--text) !important;
+    border-radius: 20px !important;
+    margin-right: 5px !important;
+    background-color: white !important;
+}
+
+.send-message-btn {
+    background-color: var(--accent) !important;
+    color: var(--text) !important;
+    border: 2px solid var(--text) !important;
+    border-radius: 20px !important;
+    padding: 8px 15px !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+    box-shadow: 2px 2px 0 var(--text) !important;
+}
+
+/* Version tag styling */
+.version-tag {
+    font-size: 12px;
+    font-weight: normal;
+    padding: 2px 5px;
+    background-color: #7958FF;
+    color: white;
+    border-radius: 3px;
+    margin-left: 5px;
+    vertical-align: middle;
+}

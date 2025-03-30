@@ -30,9 +30,12 @@ body {
 }
 
 header {
-    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
-    text-align: center;
+    margin-bottom: 50px;
+    width: 100%;
 }
 
 .title-container {
@@ -42,22 +45,22 @@ header {
 }
 
 .logout-button {
-    position: absolute !important;
-    right: 100px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    background-color: var(--accent) !important;
-    color: var(--text) !important;
-    border: 3px solid var(--text) !important;
-    padding: 8px 15px !important;
-    border-radius: 8px !important;
-    font-weight: bold !important;
-    cursor: pointer !important;
-    box-shadow: 3px 3px 0 var(--text) !important;
-    transition: all 0.2s !important;
-    font-family: 'Comic Neue', cursive !important;
-    font-size: 16px !important;
-    z-index: 1000 !important;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--accent);
+    color: var(--text);
+    border: 3px solid var(--text);
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 3px 3px 0 var(--text);
+    transition: all 0.2s;
+    font-family: 'Comic Neue', cursive;
+    font-size: 16px;
+    z-index: 1000;
 }
 
 .logout-button:hover {

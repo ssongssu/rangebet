@@ -12,7 +12,8 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
 // DOM Elements
-let chatToggleBtn = document.getElementById('chat-toggle');
+// No longer using chatToggleBtn as it's now a wallet button
+let chatToggleBtn = null;
 let chatPanel = document.getElementById('chat-panel');
 let closeChatBtn = document.getElementById('close-chat');
 let minimizeChatBtn = document.getElementById('minimize-chat');
@@ -45,12 +46,7 @@ export function initChat() {
     chatInput = document.getElementById('chat-input');
     sendMessageBtn = document.getElementById('send-message');
     
-    // Update the chat button text if needed
-    if (chatToggleBtn) {
-        // Make sure button is green
-        chatToggleBtn.style.backgroundColor = '#00CC00';
-        chatToggleBtn.style.color = 'white';
-    }
+    // Don't modify the button in chat.js as it's now a wallet button
     
     // Remove the chat bubble icon from the chat header
     const chatBox = document.querySelector('.chat-box');

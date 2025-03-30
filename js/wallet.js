@@ -23,6 +23,11 @@ export function initWallet() {
     // Get DOM elements
     connectWalletBtn = document.getElementById('chat-toggle');
     
+    // Make sure button text is CONNECT WALLET
+    if (connectWalletBtn) {
+        connectWalletBtn.textContent = 'CONNECT WALLET';
+    }
+    
     // Add wallet address display element to the UI
     setupWalletDisplay();
     

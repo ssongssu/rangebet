@@ -233,6 +233,7 @@ function setupChatListener() {
     
     if (!currentUser) {
         console.error("Cannot load chat: No user logged in");
+        addSystemMessage("Please log in to use the chat feature.");
         return;
     }
     
@@ -304,6 +305,7 @@ async function sendMessage() {
     
     if (!currentUser || !userProfile) {
         console.error("Cannot send message: User not logged in");
+        addSystemMessage("Please log in to send messages.");
         return;
     }
     
@@ -425,41 +427,13 @@ function escapeHTML(text) {
     return div.innerHTML;
 }
 
-// Force fix any minimized state when document is fully loaded
+// Initialize chat when the script is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize with a delay to ensure auth is loaded
     setTimeout(initChat, 2000);
     
-    // Also apply additional styling fixes after a delay
+    // Also apply a direct style check after 3 seconds to make sure styles are applied
     setTimeout(() => {
-        console.log("Applying additional chat styling fixes");
-        
-        // Force expand chat panel
-        if (chatPanel) {
-            chatPanel.classList.remove('minimized');
-            chatPanel.style.display = 'flex';
-            chatPanel.style.flexDirection = 'column';
-            chatPanel.style.maxHeight = '400px';
-            chatPanel.style.minHeight = '300px';
-        }
-        
-        // Force display chat messages
-        if (chatMessages) {
-            chatMessages.style.display = 'flex';
-            chatMessages.style.flexDirection = 'column';
-            chatMessages.style.flex = '1';
-            chatMessages.style.minHeight = '200px';
-            chatMessages.style.backgroundColor = 'white';
-            chatMessages.style.backgroundImage = 'none';
-        }
-        
-        // Force display chat input container
-        const inputContainer = document.querySelector('.chat-input-container');
-        if (inputContainer) {
-            inputContainer.style.display = 'flex';
-        }
-        
-        // Apply styles to all message elements
         const messages = document.querySelectorAll('.chat-message, .message-self, .message-other');
         messages.forEach(msg => {
             msg.style.backgroundColor = 'transparent';
@@ -467,11 +441,26 @@ document.addEventListener('DOMContentLoaded', () => {
             msg.style.boxShadow = 'none';
         });
         
+        const chatMessagesElem = document.getElementById('chat-messages');
+        if (chatMessagesElem) {
+            chatMessagesElem.style.backgroundImage = 'none';
+            chatMessagesElem.style.backgroundColor = 'white';
+            // Force display style
+            chatMessagesElem.style.display = 'flex';
+        }
+        
         // Make connect wallet button green
         const walletBtn = document.getElementById('chat-toggle');
         if (walletBtn) {
             walletBtn.style.backgroundColor = '#00CC00';
             walletBtn.style.color = 'white';
+        }
+        
+        // Ensure chat box is visible
+        const chatPanel = document.getElementById('chat-panel');
+        if (chatPanel) {
+            chatPanel.classList.remove('minimized');
+            chatPanel.style.display = 'flex';
         }
     }, 3000);
 });

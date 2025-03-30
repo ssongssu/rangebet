@@ -218,33 +218,46 @@ function setupChatListener() {
             if (isFirstLoad && !snapshot.empty) {
                 // Clear existing messages on first load
                 chatMessages.innerHTML = '';
-                isFirstLoad = false;
-            }
-            
-            // Process new messages
-            const newMessages = [];
-            snapshot.docChanges().forEach((change) => {
-                if (change.type === "added") {
-                    newMessages.push({
-                        id: change.doc.id,
-                        ...change.doc.data()
+                
+                // Process all existing messages
+                const allMessages = [];
+                snapshot.forEach((doc) => {
+                    allMessages.push({
+                        id: doc.id,
+                        ...doc.data()
                     });
-                }
-            });
-            
-            // Sort messages chronologically (oldest first)
-            newMessages.sort((a, b) => {
-                return a.timestamp?.toMillis() - b.timestamp?.toMillis();
-            });
-            
-            // Add new messages to chat
-            newMessages.forEach((message) => {
-                addMessageToChat(message);
-            });
-            
-            // Scroll to bottom of chat if new messages were added
-            if (newMessages.length > 0) {
-                scrollToBottom();
+                });
+                
+                // Sort messages chronologically (oldest first)
+                allMessages.sort((a, b) => {
+                    return a.timestamp?.toMillis() - b.timestamp?.toMillis();
+                });
+                
+                // Add all messages to chat
+                allMessages.forEach((message) => {
+                    addMessageToChat(message);
+                });
+                
+                isFirstLoad = false;
+            } else {
+                // Process only new messages
+                snapshot.docChanges().forEach((change) => {
+                    if (change.type === "added") {
+                        // Check if this is a completely new message (not part of the initial load)
+                        const alreadyExists = Array.from(chatMessages.children).some(
+                            el => el.dataset.messageId === change.doc.id
+                        );
+                        
+                        if (!alreadyExists) {
+                            const message = {
+                                id: change.doc.id,
+                                ...change.doc.data()
+                            };
+                            addMessageToChat(message);
+                            scrollToBottom();
+                        }
+                    }
+                });
             }
         }, (error) => {
             console.error("Error setting up chat listener:", error);
@@ -297,23 +310,25 @@ async function sendMessage() {
 function addMessageToChat(message) {
     if (!chatMessages) return;
     
-    const { currentUser } = getCurrentUser();
+    const { currentUser, userProfile } = getCurrentUser();
     
     if (!currentUser) {
         console.error("Cannot add message: No user logged in");
         return;
     }
     
+    // Make sure the message has a unique ID
+    if (!message.id) {
+        message.id = `local_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+    }
+    
     // Check if message already exists to prevent duplicates
     const existingMessage = Array.from(chatMessages.children).find(
-        el => {
-            return el.dataset.messageId === message.id ||
-                   (el.querySelector('.message-text').textContent === message.text && 
-                    el.querySelector('.message-time').textContent === 'Just now')
-        }
+        el => el.dataset.messageId === message.id
     );
     
     if (existingMessage) {
+        console.log("Message already exists, skipping", message.id);
         return; // Message already exists
     }
     
@@ -322,7 +337,7 @@ function addMessageToChat(message) {
     // Create message element
     const messageElement = document.createElement('div');
     messageElement.className = `chat-message ${isCurrentUser ? 'message-self' : 'message-other'}`;
-    messageElement.dataset.messageId = message.id || Date.now().toString(); // Ensure unique ID
+    messageElement.dataset.messageId = message.id;
     
     // Format timestamp
     let formattedTime = 'Just now';
@@ -334,9 +349,11 @@ function addMessageToChat(message) {
         }
     }
     
+    const username = isCurrentUser ? userProfile.username || 'You' : (message.username || 'Player');
+
     // Create message HTML
     messageElement.innerHTML = `
-        <span class="message-username">${isCurrentUser ? 'You (Your username)' : (message.username || 'Player')}</span>
+        <span class="message-username">${username}</span>
         <div class="message-text">${escapeHTML(message.text)}</div>
         <span class="message-time">${formattedTime}</span>
     `;

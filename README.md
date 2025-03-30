@@ -2,6 +2,17 @@
 
 A manga-themed betting game with Firebase integration for user accounts, real-time statistics, and leaderboards.
 
+## Deployment
+
+To deploy the application to Firebase Hosting:
+
+1. Make sure you have the Firebase CLI installed and you're logged in
+2. Run the deployment script: `deploy.bat` (on Windows) or `firebase deploy`
+3. Your application will be deployed from the root directory (not from a public directory)
+4. Visit https://manga-bet.web.app to see the deployed application
+
+**Important**: Always deploy from the root directory. Do not create or use a separate public directory, as this can cause confusion and sync issues.
+
 ## Features
 
 - **Manga-styled UI**: Colorful, dynamic interface with comic-style design elements

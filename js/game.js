@@ -7,23 +7,23 @@ import {
     serverTimestamp 
 } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
-// DOM Elements
-const minHandle = document.getElementById('min-handle');
-const maxHandle = document.getElementById('max-handle');
-const selectedRange = document.getElementById('selected-range');
-const minValueEl = document.getElementById('min-value');
-const maxValueEl = document.getElementById('max-value');
-const rangeWidthEl = document.getElementById('range-width');
-const winProbabilityEl = document.getElementById('win-probability');
-const payoutMultiplierEl = document.getElementById('payout-multiplier');
-const potentialWinEl = document.getElementById('potential-win');
-const betAmountInput = document.getElementById('bet-amount');
-const betButton = document.getElementById('bet-button');
-const sliderContainer = document.querySelector('.slider-container');
-const resultMarker = document.getElementById('result-marker');
-const resultValue = document.getElementById('result-value');
-const resultAmount = document.getElementById('result-amount');
-const resultDisplay = document.getElementById('result-display');
+// These variables will be properly initialized in initGame
+let minHandle;
+let maxHandle;
+let selectedRange;
+let minValueEl;
+let maxValueEl;
+let rangeWidthEl;
+let winProbabilityEl;
+let payoutMultiplierEl;
+let potentialWinEl;
+let betAmountInput;
+let betButton;
+let sliderContainer;
+let resultMarker;
+let resultValue;
+let resultAmount;
+let resultDisplay;
 
 // Constants
 const MIN = 0;
@@ -47,27 +47,38 @@ export function initGame(balance) {
     userBalance = (typeof balance === 'number' && !isNaN(balance)) ? balance : 1000;
     console.log("Game initialized with balance:", userBalance);
     
+    // Initialize DOM elements
+    minHandle = document.getElementById('min-handle');
+    maxHandle = document.getElementById('max-handle');
+    selectedRange = document.getElementById('selected-range');
+    minValueEl = document.getElementById('min-value');
+    maxValueEl = document.getElementById('max-value');
+    rangeWidthEl = document.getElementById('range-width');
+    winProbabilityEl = document.getElementById('win-probability');
+    payoutMultiplierEl = document.getElementById('payout-multiplier');
+    potentialWinEl = document.getElementById('potential-win');
+    betAmountInput = document.getElementById('bet-amount');
+    betButton = document.getElementById('bet-button');
+    sliderContainer = document.querySelector('.slider-container');
+    resultMarker = document.getElementById('result-marker');
+    resultValue = document.getElementById('result-value');
+    resultAmount = document.getElementById('result-amount');
+    resultDisplay = document.getElementById('result-display');
+    
+    console.log("DOM elements initialized, minHandle:", minHandle ? "found" : "not found");
+    console.log("maxHandle:", maxHandle ? "found" : "not found");
+    
+    // Set initial values
+    minValue = 25.0;
+    maxValue = 75.0;
+    
     // Function to initialize UI when elements are ready
     const initializeUI = () => {
         console.log("Checking DOM elements...");
-        // Get fresh references to DOM elements
-        const minHandleEl = document.getElementById('min-handle');
-        const maxHandleEl = document.getElementById('max-handle');
-        const selectedRangeEl = document.getElementById('selected-range');
         
-        if (minHandleEl && maxHandleEl && selectedRangeEl) {
-            console.log("DOM elements found, initializing UI");
-            // Update global references
-            minHandle = minHandleEl;
-            maxHandle = maxHandleEl;
-            selectedRange = selectedRangeEl;
-            sliderContainer = document.querySelector('.slider-container');
-            
-            // Set initial values
-            minValue = 25.0;
-            maxValue = 75.0;
-            
-            // Initialize UI
+        if (minHandle && maxHandle && selectedRange) {
+            console.log("DOM elements found, updating UI");
+            // Update UI
             updateHandlePositions();
             updateUI();
             
@@ -77,6 +88,13 @@ export function initGame(balance) {
             console.log("Game initialization complete");
         } else {
             console.error("Required DOM elements not found, retrying in 500ms");
+            
+            // Re-initialize DOM elements
+            minHandle = document.getElementById('min-handle');
+            maxHandle = document.getElementById('max-handle');
+            selectedRange = document.getElementById('selected-range');
+            sliderContainer = document.querySelector('.slider-container');
+            
             setTimeout(initializeUI, 500);
         }
     };

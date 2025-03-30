@@ -222,6 +222,7 @@
     <script type="module" src="js/ui.js"></script>
     <script type="module" src="js/ui-tabs.js"></script>
     <script type="module" src="js/chat.js"></script>
+    <script type="module" src="js/wallet.js"></script>
     <script type="module" src="js/debug.js"></script>
     <!-- Main App Initialization -->
     <script type="module" src="js/app.js"></script>
@@ -262,6 +263,28 @@
             background-color: transparent !important;
             border: none !important;
             box-shadow: none !important;
+        }
+        
+        /* Wallet info styling */
+        .wallet-info {
+            margin-top: 5px;
+            padding: 5px 10px;
+            background-color: var(--accent);
+            border: 2px solid var(--text);
+            border-radius: 5px;
+            display: inline-block;
+            transform: rotate(-1deg);
+            box-shadow: 2px 2px 0 var(--text);
+        }
+        
+        .wallet-address {
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        #wallet-address-display {
+            color: var(--primary);
+            font-weight: bold;
         }
     </style>
 </body>

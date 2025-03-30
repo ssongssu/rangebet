@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manga Betting Game v0.13</title>
+    <title>Manga Betting Game v0.14</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Russo+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=1.9">
+    <link rel="stylesheet" href="css/styles.css?v=2.0">
     <!-- Added override styles with increased version number -->
-    <link rel="stylesheet" href="css/overrides.css?v=1.9">
+    <link rel="stylesheet" href="css/overrides.css?v=2.0">
 </head>
 <body>
     <!-- Restructured header -->
     <header>
         <div class="title-container">
             <div class="title-text">RANGE BET</div>
-            <div class="title-badge">MANGA EDITION <span class="version-tag">v0.13</span></div>
+            <div class="title-badge">MANGA EDITION <span class="version-tag">v0.14</span></div>
             <div class="title-explosion-left">💥</div>
             <div class="title-explosion-right">💰</div>
         </div>
@@ -78,7 +78,7 @@
                     Hello, <span id="username-display">Player</span>!
                     <div class="balance">Balance: <span id="balance-display">1000</span> credits</div>
                 </div>
-                <button type="button" id="chat-toggle" class="chat-toggle-btn" style="background-color: #00CC00 !important; color: white !important;">CONNECT WALLET</button>
+                <button type="button" id="chat-toggle" class="chat-toggle-btn">CONNECT WALLET</button>
             </div>
             
             <!-- Game tabs -->
@@ -204,7 +204,8 @@
                     </div>
                 </div>
                 <div id="chat-messages" class="chat-messages">
-                    <!-- Messages will be inserted here -->
+                    <!-- Will be populated with messages -->
+                    <div class="chat-notification">Welcome to the chat! Messages will appear here.</div>
                 </div>
                 <div class="chat-input-container">
                     <input type="text" id="chat-input" class="chat-input" placeholder="Type your message..." maxlength="100">
@@ -226,78 +227,5 @@
     <script type="module" src="js/debug.js"></script>
     <!-- Main App Initialization -->
     <script type="module" src="js/app.js"></script>
-    <!-- Direct style overrides -->
-    <style>
-        /* Version tag styling */
-        .version-tag {
-            font-size: 12px;
-            font-weight: normal;
-            padding: 2px 5px;
-            background-color: #7958FF;
-            color: white;
-            border-radius: 3px;
-            margin-left: 5px;
-            vertical-align: middle;
-        }
-        
-        /* Direct overrides to ensure changes take effect */
-        .chat-box::before {
-            content: none !important;
-            display: none !important;
-        }
-        
-        .chat-messages {
-            background-image: none !important;
-            background-color: white !important;
-        }
-        
-        .message-self, .message-other {
-            background-color: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-        }
-        
-        .message-text {
-            background-color: transparent !important;
-        }
-        
-        .chat-toggle-btn {
-            background-color: #00CC00 !important;
-            color: white !important;
-        }
-        
-        /* Force all chat messages to be unstyled */
-        #chat-messages .chat-message,
-        #chat-messages .chat-message *,
-        #chat-messages div,
-        #chat-messages span {
-            background: none !important;
-            background-color: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-        }
-        
-        /* Wallet info styling */
-        .wallet-info {
-            margin-top: 5px;
-            padding: 5px 10px;
-            background-color: var(--accent);
-            border: 2px solid var(--text);
-            border-radius: 5px;
-            display: inline-block;
-            transform: rotate(-1deg);
-            box-shadow: 2px 2px 0 var(--text);
-        }
-        
-        .wallet-address {
-            font-weight: bold;
-            font-size: 14px;
-        }
-        
-        #wallet-address-display {
-            color: var(--primary);
-            font-weight: bold;
-        }
-    </style>
 </body>
 </html>

@@ -52,16 +52,33 @@ export function initChat() {
         chatToggleBtn.style.color = 'white';
     }
     
-    // Remove the chat bubble icon from the chat header
-    const chatBox = document.querySelector('.chat-box');
-    if (chatBox) {
-        chatBox.style.setProperty('--before-content', 'none', 'important');
+    // Remove any existing classes that might affect display
+    if (chatPanel) {
+        chatPanel.classList.remove('minimized');
     }
     
-    // Make sure chat messages area has no grey background
+    // Make sure chat panel is visible and expanded
+    if (chatPanel) {
+        chatPanel.style.display = 'flex';
+        chatPanel.style.flexDirection = 'column';
+        chatPanel.style.maxHeight = '400px';
+        chatPanel.style.minHeight = '300px';
+    }
+    
+    // Make sure chat messages area has no grey background and is visible
     if (chatMessages) {
         chatMessages.style.backgroundImage = 'none';
         chatMessages.style.backgroundColor = 'white';
+        chatMessages.style.display = 'flex';
+        chatMessages.style.flexDirection = 'column';
+        chatMessages.style.minHeight = '200px';
+        chatMessages.style.flex = '1';
+    }
+    
+    // Make sure chat input container is visible
+    const inputContainer = document.querySelector('.chat-input-container');
+    if (inputContainer) {
+        inputContainer.style.display = 'flex';
     }
     
     // Set up event listeners
@@ -151,7 +168,6 @@ function toggleChat() {
 // Show chat panel
 function showChat() {
     chatPanel.style.display = 'flex';
-    chatInput.focus();
     isMinimized = false;
     chatPanel.classList.remove('minimized');
     
@@ -163,6 +179,11 @@ function showChat() {
     // Scroll to bottom of chat
     if (chatMessages) {
         chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    // Focus on input if available
+    if (chatInput) {
+        chatInput.focus();
     }
 }
 
@@ -404,25 +425,47 @@ function escapeHTML(text) {
     return div.innerHTML;
 }
 
-// Initialize chat when the script is loaded
+// Force fix any minimized state when document is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize with a delay to ensure auth is loaded
     setTimeout(initChat, 2000);
     
-    // Also apply a direct style check after 3 seconds to make sure styles are applied
+    // Also apply additional styling fixes after a delay
     setTimeout(() => {
+        console.log("Applying additional chat styling fixes");
+        
+        // Force expand chat panel
+        if (chatPanel) {
+            chatPanel.classList.remove('minimized');
+            chatPanel.style.display = 'flex';
+            chatPanel.style.flexDirection = 'column';
+            chatPanel.style.maxHeight = '400px';
+            chatPanel.style.minHeight = '300px';
+        }
+        
+        // Force display chat messages
+        if (chatMessages) {
+            chatMessages.style.display = 'flex';
+            chatMessages.style.flexDirection = 'column';
+            chatMessages.style.flex = '1';
+            chatMessages.style.minHeight = '200px';
+            chatMessages.style.backgroundColor = 'white';
+            chatMessages.style.backgroundImage = 'none';
+        }
+        
+        // Force display chat input container
+        const inputContainer = document.querySelector('.chat-input-container');
+        if (inputContainer) {
+            inputContainer.style.display = 'flex';
+        }
+        
+        // Apply styles to all message elements
         const messages = document.querySelectorAll('.chat-message, .message-self, .message-other');
         messages.forEach(msg => {
             msg.style.backgroundColor = 'transparent';
             msg.style.border = 'none';
             msg.style.boxShadow = 'none';
         });
-        
-        const chatMessagesElem = document.getElementById('chat-messages');
-        if (chatMessagesElem) {
-            chatMessagesElem.style.backgroundImage = 'none';
-            chatMessagesElem.style.backgroundColor = 'white';
-        }
         
         // Make connect wallet button green
         const walletBtn = document.getElementById('chat-toggle');

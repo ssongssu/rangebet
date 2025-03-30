@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // Stats and History Module
 import { db } from './firebase-config.js';
 import { getCurrentUser } from './auth.js';
@@ -184,13 +183,8 @@ function displayErrorMessage(message) {
 document.addEventListener('DOMContentLoaded', () => {
     // Wait for auth to be fully initialized
     setTimeout(initStats, 2000);
-});
-
-export {};
-=======
-[Previous stats.js content with added event listener at the bottom]
-// Add event listener for Load History button
-document.addEventListener('DOMContentLoaded', () => {
+    
+    // Add event listener for Load History button
     const loadHistoryBtn = document.getElementById('load-history-btn');
     if (loadHistoryBtn) {
         loadHistoryBtn.addEventListener('click', () => {
@@ -199,4 +193,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
->>>>>>> 47e9cca1c98ec2ac5911c46215ad48f4331aeef2
+
+// Ensure these are exported at the top of the file
+export { 
+    initStats, 
+    loadUserHistory 
+};

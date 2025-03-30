@@ -3,7 +3,7 @@ node_modules/
 
 # Firebase configuration (optional, depends on your preference)
 .firebaserc
-firebase.json
+# firebase.json - We want to track this file now
 
 # Logs
 *.log

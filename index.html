@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manga Betting Game</title>
+    <title>Manga Betting Game v0.12</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Russo+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css?v=1.8">
     <!-- Added override styles with increased version number -->
@@ -14,7 +14,7 @@
     <header>
         <div class="title-container">
             <div class="title-text">RANGE BET</div>
-            <div class="title-badge">MANGA EDITION</div>
+            <div class="title-badge">MANGA EDITION <span class="version-tag">v0.12</span></div>
             <div class="title-explosion-left">💥</div>
             <div class="title-explosion-right">💰</div>
         </div>
@@ -196,7 +196,7 @@
             
             <!-- Chat panel -->
             <div id="chat-panel" class="chat-box">
-                <div class="chat-header" onclick="document.getElementById('chat-panel').classList.toggle('minimized'); const messagesEl = document.getElementById('chat-messages'); const inputEl = document.querySelector('.chat-input-container'); if(document.getElementById('chat-panel').classList.contains('minimized')){messagesEl.style.display='none'; inputEl.style.display='none';}else{messagesEl.style.display='flex'; inputEl.style.display='flex';}">
+                <div class="chat-header">
                     <h2>PLAYERS CHAT</h2>
                     <div class="chat-controls">
                         <button type="button" id="minimize-chat" class="minimize-chat-btn">_</button>

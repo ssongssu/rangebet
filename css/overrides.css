@@ -17,7 +17,7 @@ header {
 }
 
 .logout-button {
-    position: fixed;
+    position: absolute;
     right: 50px;
     top: 20px;
     transform: none;

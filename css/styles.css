@@ -19,6 +19,98 @@
     display: block;
 }
 
+/* History Table Styling */
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    border: 3px solid var(--text);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--text-inverse);
+    box-shadow: 4px 4px 0 var(--text);
+}
+
+.history-table thead {
+    background-color: var(--accent);
+    color: var(--text);
+}
+
+.history-table th {
+    padding: 12px;
+    text-align: left;
+    font-family: 'Bangers', cursive;
+    font-size: 16px;
+    border-bottom: 2px solid var(--text);
+    letter-spacing: 1px;
+}
+
+.history-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.history-table tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.history-table tr:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.win {
+    color: #00CC00;
+    font-weight: bold;
+}
+
+.loss {
+    color: var(--primary);
+    font-weight: bold;
+}
+
+/* Recent Bets List */
+.recent-bets-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.recent-bets-list li {
+    padding: 8px 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.recent-bets-list li:last-child {
+    border-bottom: none;
+}
+
+.bet-username {
+    font-weight: bold;
+    color: var(--highlight);
+}
+
+.bet-amount {
+    color: var(--text);
+}
+
+/* Add margin to load history button */
+#load-history-btn {
+    margin: 15px 0;
+    display: block;
+    background-color: var(--secondary);
+    color: var(--text-inverse);
+    border: 2px solid var(--text);
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 3px 3px 0 var(--text);
+}
+
 * {
     margin: 0;
     padding: 0;

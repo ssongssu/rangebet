@@ -1,69 +1,82 @@
-/* Username and Greeting Styles */
-#username-display {
-    font-weight: bold;
-    color: #2c3e50;
-    font-size: 1.2em;
-    margin-right: 10px;
+/* Override styles for RangeBet */
+
+/* Remove speech bubble icon from chat box */
+.chat-box::before {
+    content: none !important;
 }
 
-/* Chat Message Styles */
-.chat-message {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-    padding: 8px;
-    border-radius: 8px;
+/* Remove grey background from chat messages */
+.chat-messages {
+    background-image: none !important;
+    background-color: white !important;
 }
 
-.message-username {
-    font-weight: bold;
-    color: #34495e;
-    margin-bottom: 4px;
-    font-size: 0.9em;
+/* Remove styling from chat messages */
+#chat-messages .chat-message {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
 }
 
-.message-self .message-username {
-    color: #2980b9;
-}
-
-.message-other .message-username {
-    color: #e74c3c;
+.message-self, .message-other {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
 }
 
 .message-text {
-    background-color: #f4f4f4;
-    padding: 6px;
-    border-radius: 4px;
-    margin-bottom: 4px;
+    background-color: transparent !important;
 }
 
-.message-time {
-    font-size: 0.7em;
-    color: #7f8c8d;
-    align-self: flex-end;
+/* Change chat button to connect wallet button */
+.chat-toggle-btn {
+    background-color: #00CC00 !important; /* Green color */
+    color: white !important;
+    font-weight: bold !important;
+    transform: rotate(0deg) !important;
+    box-shadow: 3px 3px 0 var(--text) !important;
+    transition: all 0.2s !important;
+    padding: 8px 15px !important;
+    border: 2px solid var(--text) !important;
+    border-radius: 8px !important;
 }
 
-/* Stats and History Styles */
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+.chat-toggle-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 4px 4px 0 var(--text) !important;
 }
 
-.stat-item {
-    background-color: #f8f9fa;
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
+.chat-toggle-btn:active {
+    transform: translateY(1px) !important;
+    box-shadow: 2px 2px 0 var(--text) !important;
 }
 
-.stat-label {
-    display: block;
-    color: #6c757d;
-    margin-bottom: 5px;
+/* Force override the message styling */
+.message-self, 
+.message-other,
+.chat-message div,
+.chat-message span {
+    background-color: transparent !important;
+    background: none !important;
+    box-shadow: none !important;
+    border: none !important;
 }
 
-.stat-value {
-    font-weight: bold;
-    color: #343a40;
+/* Make sure player chat has no speech bubble */
+.chat-header h2::before {
+    content: "";
+}
+
+/* Additional overrides for chat message background */
+.chat-messages .message-self,
+.chat-messages .message-other {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.chat-message .message-text {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
 }

@@ -2,6 +2,14 @@
 
 A manga-themed betting game with Firebase integration for user accounts, real-time statistics, and leaderboards.
 
+## Features
+
+- User authentication with Firebase
+- Real-time betting game with slider controls
+- History and statistics tracking
+- Online player counter
+- Chat functionality
+
 ## Deployment
 
 To deploy the application to Firebase Hosting:

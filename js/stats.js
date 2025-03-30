@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Stats and History Module
 import { db } from './firebase-config.js';
 import { getCurrentUser } from './auth.js';
@@ -186,3 +187,16 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {};
+=======
+[Previous stats.js content with added event listener at the bottom]
+// Add event listener for Load History button
+document.addEventListener('DOMContentLoaded', () => {
+    const loadHistoryBtn = document.getElementById('load-history-btn');
+    if (loadHistoryBtn) {
+        loadHistoryBtn.addEventListener('click', () => {
+            console.log('Load History button clicked');
+            loadUserHistory();
+        });
+    }
+});
+>>>>>>> 47e9cca1c98ec2ac5911c46215ad48f4331aeef2

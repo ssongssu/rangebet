@@ -7,7 +7,7 @@ DEVELOPMENT_GUIDELINES.md
 This file contains ALL critical information about:
 
 - Version numbering (use v0.XX format)
-- Deployment process (deploy from root, NOT public folder)
+- Deployment process (deploy directly from root)
 - Project structure and organization
 - Component styling requirements
 - Common issues and their solutions
@@ -15,11 +15,12 @@ This file contains ALL critical information about:
 Following these guidelines will save significant time and prevent repetitive explanations.
 
 Key points to remember:
-1. Firebase deploys from ROOT, not the public folder
-2. Always increment version numbers (v0.13, v0.14, etc.)
+1. Firebase deploys directly from ROOT - there is NO public folder
+2. Always increment version numbers (v0.14, v0.15, etc.)
 3. Include version in page title and badge
-4. Chat box has specific styling requirements
+4. Chat box requires specific styling with !important flags
 5. Wallet connection uses the chat-toggle button (green)
+6. CSS files need version increments in query parameters
 
 Any adjustments to these guidelines should be documented in DEVELOPMENT_GUIDELINES.md
 

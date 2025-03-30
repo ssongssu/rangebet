@@ -8,13 +8,14 @@ This document contains important rules, processes, and guidelines for developing
 - **Version Display**: 
   - The version number must be displayed in the page title: `<title>Manga Betting Game v0.XX</title>`
   - The version number must appear in the title badge: `<div class="title-badge">MANGA EDITION <span class="version-tag">v0.XX</span></div>`
-- **CSS Version**: Increment the CSS version query parameter when updating styles: `?v=1.X`
+- **CSS Version**: Increment the CSS version query parameter when updating styles: `?v=X.Y`
 - **Commit Messages**: Include the version number in commit messages for major changes: "Feature X implemented - v0.XX"
 
 ## Deployment Process
 
-- **Deployment Source**: Firebase is configured to deploy from the root directory, NOT from the public folder
-- **Do NOT Update Public Folder**: Do not waste time updating files in the public directory as they are not used for deployment
+- **Deployment Source**: Firebase is configured to deploy from the root directory
+- **No Public Directory**: The public directory has been removed to simplify deployment
+- **Firebase Configuration**: The firebase.json file is set to deploy from the project root
 - **Deploy Command**: Use `firebase deploy` from the project root directory to deploy changes
 - **Git Push**: Always push changes to the remote repository with `git push` before or after deployment
 
@@ -45,7 +46,8 @@ This document contains important rules, processes, and guidelines for developing
 ### Chat Box
 - Chat box should have a clean, white background
 - No speech bubble icon or decorative elements
-- Styles are defined in overrides.css
+- Styles are defined in overrides.css with !important flags
+- Minimum height should be set to prevent collapse
 - Chat toggle button is now used for wallet connection (green color)
 
 ### Wallet Connection
@@ -60,8 +62,8 @@ This document contains important rules, processes, and guidelines for developing
   - User accounts and profiles
   - Chat messages
   - Game history
-- Firebase hosting is configured in firebase.json
-- Deployment does NOT use the public folder
+- Firebase hosting is configured in firebase.json to deploy from root
+- No public directory is used for deployment
 
 ## Common Issues & Solutions
 
@@ -69,6 +71,7 @@ This document contains important rules, processes, and guidelines for developing
 - If chat box collapses or loses styling, check for conflicts in overrides.css
 - Make sure all !important flags are applied to chat styling
 - Check for proper DOM structure in index.html
+- Ensure minimum height and flex display properties are set
 
 ### Wallet Connection Issues
 - If wallet connection fails, check wallet.js for proper Phantom wallet integration

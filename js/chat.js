@@ -45,12 +45,7 @@ export function initChat() {
     chatInput = document.getElementById('chat-input');
     sendMessageBtn = document.getElementById('send-message');
     
-    // Update the chat button text if needed
-    if (chatToggleBtn) {
-        // Make sure button is green
-        chatToggleBtn.style.backgroundColor = '#00CC00';
-        chatToggleBtn.style.color = 'white';
-    }
+    // Chat toggle button is now managed by wallet.js
     
     // Remove the chat bubble icon from the chat header
     const chatBox = document.querySelector('.chat-box');
@@ -74,13 +69,12 @@ export function initChat() {
 // Set up event listeners
 function setupEventListeners() {
     // We no longer use chat toggle button for chat - it's now for wallet connection
-    // Chat is always visible
     
-    // Make chat always visible by default
-    if (chatPanel) {
-        showChat();
+    // Create a dedicated chat toggle
+    const chatBox = document.querySelector('.chat-box');
+    if (chatBox) {
+        // We will only use minimize and close buttons for chat interactions
     }
-=======
     
     // Close chat
     if (closeChatBtn) {
@@ -410,7 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize with a delay to ensure auth is loaded
     setTimeout(initChat, 2000);
     
-    // Also apply a direct style check after 3 seconds to make sure styles are applied
+    // Apply styling fix to chat messages
     setTimeout(() => {
         const messages = document.querySelectorAll('.chat-message, .message-self, .message-other');
         messages.forEach(msg => {
@@ -423,13 +417,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (chatMessagesElem) {
             chatMessagesElem.style.backgroundImage = 'none';
             chatMessagesElem.style.backgroundColor = 'white';
-        }
-        
-        // Make connect wallet button green
-        const walletBtn = document.getElementById('chat-toggle');
-        if (walletBtn) {
-            walletBtn.style.backgroundColor = '#00CC00';
-            walletBtn.style.color = 'white';
         }
     }, 3000);
 });

@@ -3,6 +3,7 @@ import { initAuth } from './auth.js';
 import { initChat } from './chat.js';
 import { initStats } from './stats.js';
 import { initGame } from './game.js';
+import { initWallet } from './wallet.js';
 
 // Centralized initialization function
 function initializeApp() {
@@ -14,10 +15,13 @@ function initializeApp() {
             // Initialize authentication first
             initAuth();
             
+            // Initialize wallet first to ensure button is set up correctly
+            setTimeout(initWallet, 500);
+            
             // Initialize other modules with slight delays to prevent race conditions
-            setTimeout(initChat, 500);
-            setTimeout(initStats, 1000);
-            setTimeout(initGame, 1500);
+            setTimeout(initChat, 1000);
+            setTimeout(initStats, 1500);
+            setTimeout(initGame, 2000);
             
             // Optional: Add global error handler
             window.addEventListener('error', (event) => {

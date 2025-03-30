@@ -23,6 +23,11 @@ export function initWallet() {
     // Get DOM elements
     connectWalletBtn = document.getElementById('chat-toggle');
     
+    // Set the button text immediately to CONNECT WALLET
+    if (connectWalletBtn) {
+        connectWalletBtn.textContent = 'CONNECT WALLET';
+    }
+    
     // Add wallet address display element to the UI
     setupWalletDisplay();
     
@@ -62,14 +67,25 @@ function setupWalletDisplay() {
 // Set up event listeners
 function setupEventListeners() {
     if (connectWalletBtn) {
-        // Remove any existing click listeners
+        // Store a reference to the original click handler
+        const originalClickHandler = connectWalletBtn.onclick;
+        
+        // Remove any existing click listeners by cloning the node
         const newButton = connectWalletBtn.cloneNode(true);
         connectWalletBtn.parentNode.replaceChild(newButton, connectWalletBtn);
         connectWalletBtn = newButton;
         
-        // Add wallet connection click handler
-        connectWalletBtn.addEventListener('click', () => {
+        // Add our wallet connection click handler
+        connectWalletBtn.addEventListener('click', (e) => {
+            // Prevent default behavior
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Handle wallet connection
             connectWallet();
+            
+            // Return false to prevent other handlers
+            return false;
         });
     }
 }
@@ -98,10 +114,15 @@ async function checkWalletConnection() {
                 isConnected = true;
                 updateWalletDisplay();
                 updateButtonText('WALLET CONNECTED');
+            } else {
+                // Make sure button says CONNECT WALLET
+                updateButtonText('CONNECT WALLET');
             }
         }
     } catch (error) {
         console.error("Error checking wallet connection:", error);
+        // Make sure button says CONNECT WALLET
+        updateButtonText('CONNECT WALLET');
     }
 }
 
@@ -198,6 +219,31 @@ function truncateAddress(address) {
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize with a delay to ensure auth is loaded
     setTimeout(initWallet, 2500);
+    
+    // Immediately set the button text
+    const button = document.getElementById('chat-toggle');
+    if (button) {
+        button.textContent = 'CONNECT WALLET';
+    }
+    
+    // Make sure button says CONNECT WALLET periodically
+    setInterval(() => {
+        const button = document.getElementById('chat-toggle');
+        if (button && button.textContent !== 'CONNECT WALLET' && 
+            button.textContent !== 'WALLET CONNECTED' && 
+            button.textContent !== 'CONNECTING...' && 
+            button.textContent !== 'INSTALL PHANTOM') {
+            button.textContent = 'CONNECT WALLET';
+        }
+    }, 500); // Check more frequently
+});
+
+// Force button text on page load
+window.addEventListener('load', () => {
+    const button = document.getElementById('chat-toggle');
+    if (button) {
+        button.textContent = 'CONNECT WALLET';
+    }
 });
 
 // Export functions for potential use in other modules

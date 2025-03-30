@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // Stats and History Module
 import { db } from './firebase-config.js';
 import { getCurrentUser } from './auth.js';
@@ -21,21 +20,18 @@ export function initStats() {
     
     // Get DOM elements - ensure they exist
     historyContainer = document.getElementById('history-container');
-    statsContainer = document.getElementById('stats-container');
     
     // Validate containers
-    if (!historyContainer || !statsContainer) {
-        console.error('History or stats containers not found');
+    if (!historyContainer) {
+        console.error('History container not found');
         return;
     }
     
-    // Clear previous content
-    historyContainer.innerHTML = '';
-    statsContainer.innerHTML = '';
-    
     // Load user history and stats
     loadUserHistory();
-    loadUserStats();
+    loadLeaderboard();
+    loadRecentBets();
+    loadOnlinePlayers();
 }
 
 // Load user betting history
@@ -72,9 +68,9 @@ export async function loadUserHistory() {
             return `
                 <div class="history-item">
                     <span class="bet-date">${formatDate(bet.timestamp.toDate())}</span>
-                    <span class="bet-amount">Bet: $${bet.amount}</span>
+                    <span class="bet-amount">Bet: ${bet.amount}</span>
                     <span class="bet-result ${bet.result}">${bet.result.toUpperCase()}</span>
-                    <span class="bet-payout">Payout: $${bet.payout || 0}</span>
+                    <span class="bet-payout">Payout: ${bet.payout || 0}</span>
                 </div>
             `;
         }).join('');
@@ -89,57 +85,22 @@ export async function loadUserHistory() {
     }
 }
 
-// Load user stats
-export async function loadUserStats() {
-    console.log('Loading user stats');
-    
-    const { userProfile } = getCurrentUser();
-    
-    if (!userProfile || !userProfile.stats) {
-        console.error('No user stats found');
-        displayNoStatsMessage();
-        return;
-    }
-    
-    const { stats } = userProfile;
-    
-    // Calculate win percentage
-    const totalBets = stats.totalBets || 0;
-    const winPercentage = totalBets > 0 
-        ? ((stats.wins || 0) / totalBets * 100).toFixed(2) 
-        : '0.00';
-    
-    const statsHTML = `
-        <h3>Your Stats</h3>
-        <div class="stats-grid">
-            <div class="stat-item">
-                <span class="stat-label">Total Bets</span>
-                <span class="stat-value">${stats.totalBets || 0}</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Wins</span>
-                <span class="stat-value">${stats.wins || 0}</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Losses</span>
-                <span class="stat-value">${stats.losses || 0}</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Win %</span>
-                <span class="stat-value">${winPercentage}%</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Best Streak</span>
-                <span class="stat-value">${stats.bestStreak || 0}</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Current Streak</span>
-                <span class="stat-value">${stats.currentStreak || 0}</span>
-            </div>
-        </div>
-    `;
-    
-    statsContainer.innerHTML = statsHTML;
+// Load leaderboard
+async function loadLeaderboard() {
+    console.log('Loading leaderboard');
+    // Implementation will go here
+}
+
+// Load recent bets
+async function loadRecentBets() {
+    console.log('Loading recent bets');
+    // Implementation will go here
+}
+
+// Load online players
+async function loadOnlinePlayers() {
+    console.log('Loading online players');
+    // Implementation will go here
 }
 
 // Utility Functions
@@ -162,15 +123,6 @@ function displayNoHistoryMessage() {
     }
 }
 
-function displayNoStatsMessage() {
-    if (statsContainer) {
-        statsContainer.innerHTML = `
-            <h3>Your Stats</h3>
-            <p>No stats available. Start playing to track your performance!</p>
-        `;
-    }
-}
-
 function displayErrorMessage(message) {
     if (historyContainer) {
         historyContainer.innerHTML = `
@@ -184,13 +136,8 @@ function displayErrorMessage(message) {
 document.addEventListener('DOMContentLoaded', () => {
     // Wait for auth to be fully initialized
     setTimeout(initStats, 2000);
-});
-
-export {};
-=======
-[Previous stats.js content with added event listener at the bottom]
-// Add event listener for Load History button
-document.addEventListener('DOMContentLoaded', () => {
+    
+    // Add event listener for Load History button
     const loadHistoryBtn = document.getElementById('load-history-btn');
     if (loadHistoryBtn) {
         loadHistoryBtn.addEventListener('click', () => {
@@ -199,4 +146,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
->>>>>>> 47e9cca1c98ec2ac5911c46215ad48f4331aeef2
+
+export {};

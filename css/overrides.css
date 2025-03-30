@@ -69,3 +69,12 @@
     color: var(--primary);
     font-weight: bold;
 }
+
+/* Version tag styling */
+.version-tag {
+    font-size: 12px;
+    font-weight: normal;
+    opacity: 0.8;
+    margin-left: 5px;
+    font-family: 'Comic Neue', sans-serif;
+}

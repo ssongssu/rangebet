@@ -45,6 +45,25 @@ export function initChat() {
     chatInput = document.getElementById('chat-input');
     sendMessageBtn = document.getElementById('send-message');
     
+    // Update the chat button text if needed
+    if (chatToggleBtn) {
+        // Make sure button is green
+        chatToggleBtn.style.backgroundColor = '#00CC00';
+        chatToggleBtn.style.color = 'white';
+    }
+    
+    // Remove the chat bubble icon from the chat header
+    const chatBox = document.querySelector('.chat-box');
+    if (chatBox) {
+        chatBox.style.setProperty('--before-content', 'none', 'important');
+    }
+    
+    // Make sure chat messages area has no grey background
+    if (chatMessages) {
+        chatMessages.style.backgroundImage = 'none';
+        chatMessages.style.backgroundColor = 'white';
+    }
+    
     // Set up event listeners
     setupEventListeners();
     
@@ -321,8 +340,13 @@ function addMessageToChat(message) {
     
     // Create message element
     const messageElement = document.createElement('div');
-    messageElement.className = `chat-message ${isCurrentUser ? 'message-self' : 'message-other'}`;
+    messageElement.className = `chat-message`; // Remove styling classes
     messageElement.dataset.messageId = message.id || Date.now().toString(); // Ensure unique ID
+    
+    // Apply direct styling to remove backgrounds
+    messageElement.style.backgroundColor = 'transparent';
+    messageElement.style.border = 'none';
+    messageElement.style.boxShadow = 'none';
     
     // Format timestamp
     let formattedTime = 'Just now';
@@ -334,11 +358,11 @@ function addMessageToChat(message) {
         }
     }
     
-    // Create message HTML
+    // Create message HTML with inline styles to force no background
     messageElement.innerHTML = `
-        <span class="message-username">${isCurrentUser ? 'You (Your username)' : (message.username || 'Player')}</span>
-        <div class="message-text">${escapeHTML(message.text)}</div>
-        <span class="message-time">${formattedTime}</span>
+        <span class="message-username" style="background: transparent; border: none; box-shadow: none;">${isCurrentUser ? 'You (Your username)' : (message.username || 'Player')}</span>
+        <div class="message-text" style="background: transparent; border: none; box-shadow: none;">${escapeHTML(message.text)}</div>
+        <span class="message-time" style="background: transparent; border: none; box-shadow: none;">${formattedTime}</span>
     `;
     
     // Add message to chat
@@ -356,6 +380,7 @@ function addSystemMessage(text) {
     const notificationElement = document.createElement('div');
     notificationElement.className = 'chat-notification';
     notificationElement.textContent = text;
+    notificationElement.style.backgroundColor = 'transparent';
     
     // Add to chat
     chatMessages.appendChild(notificationElement);
@@ -382,4 +407,27 @@ function escapeHTML(text) {
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize with a delay to ensure auth is loaded
     setTimeout(initChat, 2000);
+    
+    // Also apply a direct style check after 3 seconds to make sure styles are applied
+    setTimeout(() => {
+        const messages = document.querySelectorAll('.chat-message, .message-self, .message-other');
+        messages.forEach(msg => {
+            msg.style.backgroundColor = 'transparent';
+            msg.style.border = 'none';
+            msg.style.boxShadow = 'none';
+        });
+        
+        const chatMessagesElem = document.getElementById('chat-messages');
+        if (chatMessagesElem) {
+            chatMessagesElem.style.backgroundImage = 'none';
+            chatMessagesElem.style.backgroundColor = 'white';
+        }
+        
+        // Make connect wallet button green
+        const walletBtn = document.getElementById('chat-toggle');
+        if (walletBtn) {
+            walletBtn.style.backgroundColor = '#00CC00';
+            walletBtn.style.color = 'white';
+        }
+    }, 3000);
 });

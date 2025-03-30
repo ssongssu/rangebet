@@ -73,12 +73,18 @@ export function initChat() {
 
 // Set up event listeners
 function setupEventListeners() {
-    // We no longer use chat toggle button for chat - it's now for wallet connection
-    // Chat is always visible
+    // We still need chat toggle functionality, but from other buttons
     
-    // Make chat always visible by default
+    // Make chat visible by default
     if (chatPanel) {
         showChat();
+    }
+    
+    // Close chat button event
+    if (closeChatBtn) {
+        closeChatBtn.addEventListener('click', () => {
+            hideChat();
+        });
     }
 =======
     

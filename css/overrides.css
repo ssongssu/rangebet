@@ -1,47 +1,28 @@
 /* Override styles for RangeBet */
 
-/* Fix chat panel display - ensure it's properly sized and styled */
-#chat-panel {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-    width: 320px;
-    max-height: 400px;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--card-bg);
-    border-radius: 10px;
-    box-shadow: 8px 8px 0 var(--text);
-    border: 3px solid var(--text);
-    overflow: hidden;
+/* Remove speech bubble icon from chat box */
+.chat-box::before {
+    content: none !important;
+    display: none !important;
 }
 
 /* Remove grey background from chat messages */
 .chat-messages {
     background-image: none !important;
     background-color: white !important;
-    flex: 1;
-    overflow-y: auto;
-    padding: 15px;
-    min-height: 200px;
-    max-height: 300px;
-    display: flex;
-    flex-direction: column;
 }
 
 /* Remove styling from chat messages */
-#chat-messages .chat-message,
-.message-self, 
-.message-other {
+#chat-messages .chat-message {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.message-self, .message-other {
     background-color: transparent !important;
     border: none !important;
     box-shadow: none !important;
-    margin-bottom: 10px;
-    max-width: 80%;
-    word-wrap: break-word;
-    display: flex;
-    flex-direction: column;
 }
 
 .message-text {
@@ -71,15 +52,58 @@
     box-shadow: 2px 2px 0 var(--text) !important;
 }
 
-/* Fix chat header styling */
+/* Force override the message styling */
+.message-self, 
+.message-other,
+.chat-message div,
+.chat-message span {
+    background-color: transparent !important;
+    background: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Make sure player chat has no speech bubble */
+.chat-header h2::before {
+    content: "";
+}
+
+/* Additional overrides for chat message background */
+.chat-messages .message-self,
+.chat-messages .message-other {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.chat-message .message-text {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Chat box styling */
+.chat-box {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 400px !important;
+    width: 100% !important;
+    margin-top: 20px !important;
+    border: 3px solid var(--text) !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+    box-shadow: 8px 8px 0 var(--text) !important;
+    background-color: white !important;
+}
+
 .chat-header {
     background-color: var(--accent) !important;
     color: var(--text) !important;
     padding: 10px 15px !important;
+    border-bottom: 2px solid var(--text) !important;
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
-    border-bottom: 2px solid var(--text) !important;
 }
 
 .chat-header h2 {
@@ -91,11 +115,21 @@
     color: var(--text) !important;
 }
 
-/* Fix chat input container */
+.chat-messages {
+    flex: 1 !important;
+    overflow-y: auto !important;
+    padding: 15px !important;
+    background-color: white !important;
+    background-image: none !important;
+    min-height: 250px !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
 .chat-input-container {
     display: flex !important;
     padding: 10px !important;
-    background-color: var(--card-bg) !important;
+    background-color: white !important;
     border-top: 2px solid var(--text) !important;
 }
 
@@ -104,7 +138,6 @@
     padding: 8px 12px !important;
     border: 2px solid var(--text) !important;
     border-radius: 20px !important;
-    font-family: 'Comic Neue', cursive !important;
     margin-right: 5px !important;
     background-color: white !important;
 }
@@ -115,17 +148,10 @@
     border: 2px solid var(--text) !important;
     border-radius: 20px !important;
     padding: 8px 15px !important;
-    font-family: 'Comic Neue', cursive !important;
     font-weight: bold !important;
     cursor: pointer !important;
     box-shadow: 2px 2px 0 var(--text) !important;
     transition: all 0.2s !important;
-}
-
-/* Remove chat bubble icon */
-.chat-box::before {
-    content: none !important;
-    display: none !important;
 }
 
 /* Fix minimized state */
@@ -165,7 +191,10 @@
 .version-tag {
     font-size: 12px;
     font-weight: normal;
-    opacity: 0.8;
+    padding: 2px 5px;
+    background-color: #7958FF;
+    color: white;
+    border-radius: 3px;
     margin-left: 5px;
-    font-family: 'Comic Neue', sans-serif;
+    vertical-align: middle;
 }

@@ -12,8 +12,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
 // DOM Elements
-// No longer using chatToggleBtn as it's now a wallet button
-let chatToggleBtn = null;
+let chatToggleBtn = document.getElementById('chat-toggle');
 let chatPanel = document.getElementById('chat-panel');
 let closeChatBtn = document.getElementById('close-chat');
 let minimizeChatBtn = document.getElementById('minimize-chat');
@@ -46,7 +45,12 @@ export function initChat() {
     chatInput = document.getElementById('chat-input');
     sendMessageBtn = document.getElementById('send-message');
     
-    // Chat toggle button is now managed by wallet.js
+    // Update the chat button text if needed
+    if (chatToggleBtn) {
+        // Make sure button is green
+        chatToggleBtn.style.backgroundColor = '#00CC00';
+        chatToggleBtn.style.color = 'white';
+    }
     
     // Remove the chat bubble icon from the chat header
     const chatBox = document.querySelector('.chat-box');
@@ -70,11 +74,11 @@ export function initChat() {
 // Set up event listeners
 function setupEventListeners() {
     // We no longer use chat toggle button for chat - it's now for wallet connection
+    // Chat is always visible
     
-    // Create a dedicated chat toggle
-    const chatBox = document.querySelector('.chat-box');
-    if (chatBox) {
-        // We will only use minimize and close buttons for chat interactions
+    // Make chat always visible by default
+    if (chatPanel) {
+        showChat();
     }
     
     // Close chat
@@ -324,8 +328,8 @@ function addMessageToChat(message) {
     const existingMessage = Array.from(chatMessages.children).find(
         el => {
             return el.dataset.messageId === message.id ||
-                   (el.querySelector('.message-text').textContent === message.text && 
-                    el.querySelector('.message-time').textContent === 'Just now')
+                   (el.querySelector('.message-text')?.textContent === message.text && 
+                    el.querySelector('.message-time')?.textContent === 'Just now')
         }
     );
     
@@ -357,7 +361,7 @@ function addMessageToChat(message) {
     
     // Create message HTML with inline styles to force no background
     messageElement.innerHTML = `
-        <span class="message-username" style="background: transparent; border: none; box-shadow: none;">${isCurrentUser ? 'You (Your username)' : (message.username || 'Player')}</span>
+        <span class="message-username" style="background: transparent; border: none; box-shadow: none;">${isCurrentUser ? 'You' : (message.username || 'Player')}</span>
         <div class="message-text" style="background: transparent; border: none; box-shadow: none;">${escapeHTML(message.text)}</div>
         <span class="message-time" style="background: transparent; border: none; box-shadow: none;">${formattedTime}</span>
     `;
@@ -405,7 +409,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize with a delay to ensure auth is loaded
     setTimeout(initChat, 2000);
     
-    // Apply styling fix to chat messages
+    // Also apply a direct style check after 3 seconds to make sure styles are applied
     setTimeout(() => {
         const messages = document.querySelectorAll('.chat-message, .message-self, .message-other');
         messages.forEach(msg => {
@@ -418,6 +422,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (chatMessagesElem) {
             chatMessagesElem.style.backgroundImage = 'none';
             chatMessagesElem.style.backgroundColor = 'white';
+        }
+        
+        // Make connect wallet button green
+        const walletBtn = document.getElementById('chat-toggle');
+        if (walletBtn) {
+            walletBtn.style.backgroundColor = '#00CC00';
+            walletBtn.style.color = 'white';
         }
     }, 3000);
 });

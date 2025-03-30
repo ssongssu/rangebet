@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manga Betting Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Russo+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="title-container">
+            <div class="title-text">RANGE BET</div>
+            <div class="title-badge">MANGA EDITION</div>
+            <div class="title-explosion-left">💥</div>
+            <div class="title-explosion-right">💰</div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Login/Signup Container -->
+        <div id="login-container">
+            <div class="auth-container">
+                <h2>START YOUR ADVENTURE!</h2>
+                <div class="auth-tabs">
+                    <div class="tab active" data-tab="login">LOGIN</div>
+                    <div class="tab" data-tab="signup">SIGN UP</div>
+                </div>
+                
+                <!-- Login Form -->
+                <div id="login-tab" class="tab-content active">
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label class="form-label" for="login-email">Your Email</label>
+                            <input type="email" class="form-input" id="login-email" required placeholder="hero@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="login-password">Secret Password</label>
+                            <input type="password" class="form-input" id="login-password" required placeholder="••••••••">
+                        </div>
+                        <div id="login-error" class="error-message"></div>
+                        <button type="submit" class="auth-btn">ENTER THE GAME!</button>
+                    </form>
+                </div>
+                
+                <!-- Sign Up Form -->
+                <div id="signup-tab" class="tab-content">
+                    <form id="signup-form">
+                        <div class="form-group">
+                            <label class="form-label" for="signup-username">Choose Your Hero Name</label>
+                            <input type="text" class="form-input" id="signup-username" required placeholder="MangaMaster">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="signup-email">Your Email</label>
+                            <input type="email" class="form-input" id="signup-email" required placeholder="hero@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="signup-password">Create a Secret Password</label>
+                            <input type="password" class="form-input" id="signup-password" required minlength="6" placeholder="At least 6 characters">
+                        </div>
+                        <div id="signup-error" class="error-message"></div>
+                        <button type="submit" class="auth-btn">JOIN THE ADVENTURE!</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Game Container -->
+        <div id="game-container" style="display: none;">
+            <!-- User Profile Bar -->
+            <div class="user-bar">
+                <div class="user-info">
+                    Hello, <span id="username-display">Player</span>!
+                    <div class="balance">Balance: <span id="balance-display">1000</span> credits</div>
+                </div>
+                <button type="button" id="logout-button">LOGOUT</button>
+            </div>
+            
+            <!-- Game tabs -->
+            <div class="game-tabs">
+                <div class="tab active" data-tab="game">GAME</div>
+                <div class="tab" data-tab="history">HISTORY</div>
+                <div class="tab" data-tab="stats">STATS</div>
+            </div>
+            
+            <!-- Game tab content -->
+            <div id="game-tab" class="tab-content active">
+                <div class="range-container">
+                    <h2>Select Your Range!</h2>
+                    
+                    <div class="range-info">
+                        <div class="range-value">MIN: <span class="value-highlight" id="min-value">25.0</span></div>
+                        <div class="win-box" id="result-display" style="display: block; background-color: transparent;">
+                            <span id="result-amount">+0</span>
+                        </div>
+                        <div class="range-value">MAX: <span class="value-highlight" id="max-value">75.0</span></div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="track"></div>
+                        <div class="selected-range" id="selected-range"></div>
+                        <div class="handle" id="min-handle"></div>
+                        <div class="handle" id="max-handle"></div>
+                        <div class="result-marker" id="result-marker">
+                            <div class="result-value" id="result-value">50.0</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tick-container">
+                        <div class="tick">0.0</div>
+                        <div class="tick">20.0</div>
+                        <div class="tick">40.0</div>
+                        <div class="tick">60.0</div>
+                        <div class="tick">80.0</div>
+                        <div class="tick">100.0</div>
+                    </div>
+                    
+                    <div class="bet-input-container">
+                        <div class="multiplier-buttons">
+                            <button type="button" class="multiplier-btn fraction-btn" data-multiplier="0.25">¼</button>
+                            <button type="button" class="multiplier-btn fraction-btn" data-multiplier="0.33">⅓</button>
+                            <button type="button" class="multiplier-btn fraction-btn" data-multiplier="0.5">½</button>
+                        </div>
+                        <input type="number" class="bet-input" id="bet-amount" value="100" min="1" step="1" placeholder="Enter bet amount">
+                        <div class="multiplier-buttons">
+                            <button type="button" class="multiplier-btn" data-multiplier="2">2×</button>
+                            <button type="button" class="multiplier-btn" data-multiplier="3">3×</button>
+                            <button type="button" class="multiplier-btn" data-multiplier="4">4×</button>
+                        </div>
+                    </div>
+                    
+                    <button type="button" class="bet-button" id="bet-button">PLACE BET!</button>
+                </div>
+                
+                <div class="bet-container">
+                    <h2>Game Statistics</h2>
+                    
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div>Range Width</div>
+                            <div class="stat-value"><span id="range-width">50.0</span> numbers</div>
+                        </div>
+                        <div class="stat-item">
+                            <div>Win Probability</div>
+                            <div class="stat-value"><span id="win-probability">50.0</span>%</div>
+                        </div>
+                        <div class="stat-item">
+                            <div>Payout Multiplier</div>
+                            <div class="stat-value"><span id="payout-multiplier">2.00</span>x</div>
+                        </div>
+                        <div class="stat-item">
+                            <div>Potential Win</div>
+                            <div class="stat-value"><span id="potential-win">200</span> credits</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- History tab content -->
+            <div id="history-tab" class="tab-content">
+                <div class="history-container" id="history-container">
+                    <h2>Your Betting History</h2>
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Stats tab content -->
+            <div id="stats-tab" class="tab-content">
+                <div class="stats-container">
+                    <h2>Game Statistics</h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stats-card">
+                            <h3>Online Players</h3>
+                            <div class="stat-value" id="online-players">0</div>
+                        </div>
+                        
+                        <div id="live-bets" class="stats-card">
+                            <h3>Recent Bets</h3>
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                        
+                        <div id="leaderboard" class="stats-card">
+                            <h3>Top Players</h3>
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase App Scripts -->
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/game.js"></script>
+    <script type="module" src="js/stats.js"></script>
+    <script type="module" src="js/ui.js"></script>
+    <script type="module" src="js/debug.js"></script>
+</body>
+</html>

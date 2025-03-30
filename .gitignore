@@ -1,0 +1,25 @@
+# Dependency directories
+node_modules/
+
+# Firebase configuration (optional, depends on your preference)
+.firebaserc
+firebase.json
+
+# Logs
+*.log
+
+# Environment files
+.env
+
+# macOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Firebase cache
+.firebase/

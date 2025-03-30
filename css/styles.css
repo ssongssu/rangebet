@@ -10,6 +10,15 @@
     --text-inverse: #FFFFFF;
 }
 
+/* Make sure tab content is displayed based on active class */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
 * {
     margin: 0;
     padding: 0;

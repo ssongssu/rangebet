@@ -147,4 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Make functions available globally for the tab-fix.js script
+window.loadUserHistory = loadUserHistory;
+window.initStats = initStats;
+
 export {};
